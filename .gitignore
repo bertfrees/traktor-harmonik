@@ -1,0 +1,9 @@
+/.sass-cache/
+/.lein-deps-sum
+/.lein-git-deps
+/.lein-failures
+/.lein-plugins
+/.lein-cljsbuild-compiler-0
+/.lein-classpath
+/target/
+/macosx/

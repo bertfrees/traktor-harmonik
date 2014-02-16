@@ -1,0 +1,514 @@
+@namespace svg "http://www.w3.org/2000/svg";
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box; }
+
+body {
+  cursor: default;
+  font-family: "Arial";
+  color: white;
+  background: black;
+  padding: 0;
+  margin: 0;
+  min-width: 1000px;
+  height: 100%;
+  overflow: hidden; }
+
+$arrow-up: url("data:image/gif;base64,R0lGODlhFQAEAIABAPbz6AAAACH5BAEKAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7");
+$arrow-down: url("data:image/gif;base64,R0lGODlhFQAEAIABAPbz5wAAACH5BAEKAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7");
+$arrow-up-down: url("data:image/gif;base64,R0lGODlhDQALAIABAIyOj////yH5BAEKAAEALAAAAAANAAsAAAIRjI+JoAnfzJux2lsnjNQyrBQAOw==");
+
+.button {
+  box-shadow: rgba(255, 255, 255, 0.199219) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.046875) 0px 1px 2px 0px;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.199219) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.046875) 0px 1px 2px 0px;
+  &.active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); }}
+
+$top-row-height: 21px + 4px + 20px + 4px + 4px;
+$inner-column-width: 77px;
+$deck-height: 10px + 68px + 2px + 4px + 20px + 4px + 10px;
+$gutter: 3px;
+$border-radius: 2px;
+
+.top {
+  position: relative;
+  height: $gutter + $top-row-height;
+  .left {
+    float: left;
+    width: 50%;
+    > div {
+      height: $top-row-height;
+      margin: $gutter ($inner-column-width + 2 * $gutter) 0 $gutter;
+      border-radius: $border-radius;
+      background: #212323; }}
+  .right {
+    float: left;
+    width: 50%;
+    > div {
+      height: $top-row-height;
+      margin: $gutter $gutter 0 ($inner-column-width + $gutter);
+      border-radius: $border-radius;
+      background: #212323; }}
+  .clock {
+    float: left;
+    width: 0;
+    > div {
+      position: relative;
+      width: 2 * $inner-column-width + $gutter;
+      height: $top-row-height;
+      top: $gutter;
+      left: - $inner-column-width - $gutter;
+      right: - $inner-column-width;
+      background: #373a3b;
+      border-radius: $border-radius;
+      .label {
+        padding-top: 5px;
+        padding-left: 9px;
+        font-size: 9px;
+        color: #919394;
+        text-transform: uppercase; } 
+      .controls {
+        position: absolute;
+        top: 21px;
+        left: 8px;
+        right: 8px;
+        bottom: 4px;
+        border-radius: $border-radius;
+        background: #131414;
+        text-align: center;
+        .input {
+          font-size: 16px;
+          position: absolute;
+          padding: 0 10px 0 0;
+          height: 20px;
+          line-height: 21px;
+          top: 4px;
+          left: 4px;
+          right: 50px + 2 * 4px;
+          background: #282929;
+          background-image: $arrow-up-down;
+          background-position: 95% 50%;
+          background-repeat: no-repeat;
+          color: #8c8e8f;
+          border-radius: $border-radius; }
+        .auto.button {
+          font-size: 12px;
+          position: absolute;
+          right: 4px;
+          top: 4px;
+          padding: 0;
+          width: 50px;
+          height: 20px;
+          line-height: 20px;
+          background: #494949;
+          border-radius: $border-radius;
+          color: #d1d1d1;
+          text-transform: uppercase;
+          &.active {
+            background: #f19d46;
+            color: #3d2910; }}}}}
+  &.mini {
+    $mini-top-row-height: 5px + 4px + 20px + 4px + 4px;
+    height: $gutter + $mini-top-row-height;
+    .clock > div {
+      height: $mini-top-row-height;
+      .label {
+        display: none; }
+      .controls {
+        top: 5px; }}
+    .left > div, .right > div {
+       height: $mini-top-row-height; }}}
+
+.decks {
+  position: relative;
+  .deck {
+    position: relative;
+    float: left;
+    width: 50%;
+    height: $gutter + $deck-height;
+    .outer {
+      position: absolute;
+      top: $gutter;
+      bottom: 0;
+      background: #737777;
+      border-radius: $border-radius;
+      .letter {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 68px;
+        border: solid #131414 2px;
+        border-top-right-radius: $border-radius;
+        padding: 16px 15px;
+        background: #383b3b;
+        color: #bdbebe;
+        font-size: 27px;
+        font-weight: bold;
+        text-transform: uppercase; }
+      .track-info {
+        position: absolute;
+        top: 10px;
+        bottom: 10px;
+        left: 10px;
+        right: 50px + 10px - 2px;
+        height: 68px;
+        background: #131414;
+        border-top-left-radius: $border-radius;
+        > * {
+          visibility: hidden; }
+        .title, .artist {
+          position: absolute;
+          left: 5px;
+          right: 139px;
+          overflow: hidden;
+          white-space: nowrap; }
+        .key, .pitch-shift, .current-key {
+          position: absolute;
+          width: 56px;
+          right: 64px; }
+        .tempo, .time-stretch, .current-tempo {
+          position: absolute;
+          width: 63px;
+          right: 5px; }
+        .title, .key, .tempo {
+          top: 3px;
+          height: 23px;
+          font-size: 19px; }
+        .artist, .pitch-shift, .time-stretch {
+          top: 27px;
+          height: 17px;
+          font-size: 15px;
+          color: #929292; }
+        .current-key, .current-tempo {
+          top: 48px;
+          font-size: 13px;
+          color: #929292; }}
+      .phase-meter {
+        position: absolute;
+        left: 10px;
+        right: 50px + 10px - 2px;
+        bottom: 10px;
+        height: 20px + 2 * 4px;
+        background: #131414;
+        border-bottom-left-radius: $border-radius;
+        > div {
+          height: 20px;
+          border-radius: $border-radius;
+          margin: 4px;
+          background: #212222;
+          svg|svg {
+            #key-offset svg|rect {
+              fill: #724b2b; }
+            #compatible-keys svg|line, #key-offset svg|line {
+              stroke: #f09a44; }}}}
+      .auto.button {
+        position: absolute;
+        right: 8px;
+        bottom: 12px;
+        padding: 0;
+        width: 44px;
+        height: 17px;
+        background: #1c1e1e;
+        border: solid black 1px;
+        line-height: 17px;
+        font-size: 11px;
+        border-radius: $border-radius;
+        text-align: center;
+        color: #dedede;
+        text-transform: uppercase;
+        &.active {
+          background: #7ae34c;
+          color: #13220c; }}
+      &.ui-state-disabled {
+        opacity: 1; }}
+    &.loaded .track-info > * {
+      visibility: visible !important; }
+    .inner {
+      position: absolute;
+      top: $gutter;
+      bottom: 0;
+      width: $inner-column-width;
+      border-radius: $border-radius;
+      background: #373a3a;
+      .key-knob {
+        position: absolute;
+        top: 30px;
+        left: ($inner-column-width - 60px) / 2;
+        svg|svg {
+          #time-stretch {
+            fill: #2696ff; }
+          #pitch-shift {
+            fill: #aeff00; }
+          #key-offset, #compatible-keys svg|path {
+            fill: #FF5500; }}
+        .label, .value {
+          position: absolute;
+          top: 53px;
+          left: 8px;
+          padding: 0; 
+          width: 44px;
+          height: 12px;
+          line-height: 12px;
+          font-size: 10px;
+          background: #202121;
+          border-radius: 2px;
+          text-align: center;
+          color: #c5c5c5;
+          text-transform: uppercase; }
+        .value {
+          display: none; }
+        &.hover .label {
+          display: none; }
+        &.hover .value {
+          display: block; }
+        &.dragging .label {
+          display: none; }
+        &.dragging .value {
+          display: block; }
+        .learn.button {
+          background: #5d5454;
+          position: absolute;
+          left: 8px + 44px - 6px;
+          top: 53px;
+          width: 2 * 6px;
+          height: 2 * 6px;
+          border: 1px solid black;
+          border-radius: 6px;
+          &.active {
+            background: #a8f8ff; }}
+        .inc, .dec {
+          display: none;
+          position: absolute;
+          top: 1px;
+          width: 10px;
+          height: 10px;
+          border-radius: $border-radius;
+          font-size: 12px;
+          vertical-align: middle;
+          text-align: center;
+          color: #eeeeee;
+          background: #111111; }
+        .inc {
+          right: 0;
+          line-height: 10px; }
+        .dec {
+          left: 0;
+          line-height: 8px; }
+        &.hover .inc {
+          display: block; }
+        &.hover .dec {
+          display: block; }}}
+    &:nth-of-type(odd) {
+      .outer {
+        left: $gutter;
+        right: $inner-column-width + 2 * $gutter; }
+      .inner {
+        right: $gutter; }}
+    &:nth-of-type(even) {
+      .outer {
+        left: $inner-column-width + $gutter;
+        right: $gutter; }
+      .inner {
+        left: 0; }}
+    &.master div.letter {
+      color: #131414;
+      background: #f19100; }
+    &.mini {
+      height: $gutter + 10px + 57px + 10px;
+      .outer {
+        .letter {
+          height: 57px;
+          width: 50px - 2px - 2px;
+          padding: 12px 12px;
+          border-bottom-right-radius: $border-radius; }
+        .track-info {
+          height: 27px; }
+        .button.auto {
+          display: none; }}
+      .inner {
+        .key-knob {
+          top: 5px; }}}}}
+
+#tracks {
+  position: absolute;
+  top: $gutter + $top-row-height + $gutter + $deck-height + $gutter + $deck-height;
+  bottom: 0;
+  clear: left;
+  float: left;
+  width: 100%;
+  > div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #323434;
+    border-radius: $border-radius;
+    margin: $gutter;
+    > div {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: 10px;
+      bottom: 10px;
+      overflow: hidden;
+      > div:nth-child(1) {
+        background: #3d4141;
+        margin-top: 1px;
+        margin-left: 1px;
+        height: 11px;
+        table#header {
+          background: #323434;
+          border-spacing: 0;
+          border-collapse: collapse;
+          thead {
+            text-align: left;
+            font-size: 12px;
+            color: #b6b6b6;
+            th {
+              position: relative;
+              > div:nth-child(1) {
+                border-left: solid 1px #3d4141;
+                margin-left: -1px;
+                height: 11px;
+                padding-left: 3px; }
+              .columnHandle {
+                position: absolute;
+                right: -4px;
+                top: 0;
+                width: 5px;
+                height: 11px;
+                z-index: 1;
+                cursor: col-resize; }
+              &:nth-child(1) div:nth-child(1) {
+                border-left: none; }
+              &.tablesorter-headerDesc {
+                background-image: $arrow-down;
+                background-position: 100% 50%;
+                background-repeat: no-repeat; }
+              &.tablesorter-headerAsc {
+                background-image: $arrow-up;
+                background-position: 100% 50%;
+                background-repeat: no-repeat; }}}}}
+      > div:nth-child(2) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 11px + 6px;
+        bottom: 0;
+        border: solid 1px black;
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          box-shadow: inset 0.5px 1px 2px #222;
+          z-index: 1;
+          pointer-events: none;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%; }
+        .viewport {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          .overview {
+            position: absolute;
+            table#body {
+              border-spacing: 0;
+              border-collapse: collapse;
+              tbody {
+                position: relative;
+                tr.track {
+                  display: table-row !important;
+                  font-size: 14px;
+                  height: 25px;
+                  line-height: 25px;
+                  color: #b2b2b2;
+                  font-size: 15px;
+                  td {
+                    border-left: solid 1px #343737;
+                    padding-left: 3px;
+                    > div {
+                      height: 25px;
+                      overflow: hidden; }
+                      &:nth-child(1) {
+                        border-left: none;
+                        > div {
+                          padding-left: 8px;
+                          color: #ef9700;
+                          font-size: 18px;
+                          font-weight: bold;
+                          text-transform: uppercase; }}}
+                  &:nth-of-type(odd) {
+                    background: #262828; }
+                  &:nth-of-type(even) {
+                    background: #1c1e1e; }
+                  &.selected {
+                    color: #fefefe;
+                    background: #50848d; }}
+                .ui-sortable-placeholder {
+                  border-top: solid 3px #ae5700;
+                  td {
+                    padding: 0; }}}}}}
+        .scrollbar {
+          background: #1d1d1d;
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 12px;
+          box-shadow:inset 1px 0 2px black;
+          overflow: hidden;
+          .track {
+            position: relative;
+            width: 12px;
+            .thumb {
+              position: absolute;
+              width: 13px;
+              .end {
+                position: absolute;
+                top: 12px;
+                bottom: 12px;
+                width: 100%;
+                border: 1px solid black;
+                box-shadow: 0 0 2px black;
+                background: #53575d;
+                border-radius: 3px; }}}
+          .scrollup, .scrolldown {
+            position: absolute;
+            right: -1px;
+            width: 13px;
+            height: 13px;
+            border: 1px solid black;
+            box-shadow: 0 0 2px black;
+            background: #53575d;
+            border-radius: 3px;
+            background-size:16px 3.5px;
+            background-repeat: no-repeat; }
+          .scrollup {
+            top: 0;
+            background-image: $arrow-up;
+            background-position: -3.5px 4px; }
+          .scrolldown {
+            bottom: 0;
+            background-image: $arrow-down;
+            background-position: -3px 4px; }
+          &.disable {
+            display: none; }}}}}}
+
+.ui-sortable-helper, .ui-draggable-dragging {
+  width: 400px !important;
+  background: transparent;
+  text-align: center;
+  color: #f19100;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: no-drop;
+  &.overDeck {
+    cursor: copy; }
+  &.overTable {
+    cursor: alias; }}

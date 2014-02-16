@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key>
+	<string>Traktor Harmonik</string>
+	<key>CFBundleIdentifier</key>
+	<string>traktor-harmonik</string>
+	<key>CFBundleVersion</key>
+	<string>1.0.0-SNAPSHOT</string>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<string>true</string>
+	<key>CFBundleExecutable</key>
+	<string>traktor-harmonik</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleIconFile</key>
+	<string>traktor.icns</string>
+	<key>Java</key>
+	<dict>
+		<key>MainClass</key>
+		<string>app.bootstrap</string>
+		<key>JVMVersion</key>
+		<string>1.5+</string>
+		<key>ClassPath</key>
+		<string>$APP_PACKAGE/Contents/Resources/traktor-harmonik-1.0.0-SNAPSHOT-standalone.jar</string>
+	</dict>
+</dict>
+</plist>
